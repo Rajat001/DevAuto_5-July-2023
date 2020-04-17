@@ -1,0 +1,25 @@
+OOPS Concept Notes :-
+
+(1).
+    
+	<?php 
+
+	class newClass{
+	public $name = "Rajat Singh";
+	private $age = "25";
+	private $branch = "Computer Science";
+
+	public function NewSubClass(){
+	return $this->branch; 
+	}
+	}
+
+	class OldClass extends newClass{
+	public function hello (){
+	//return "Calling Old Class Here";
+	return $this->name;
+	}
+	}
+
+
+	?>
