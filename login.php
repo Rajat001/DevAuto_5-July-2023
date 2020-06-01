@@ -124,7 +124,7 @@ require_once('header/conn.php');
                       $user = mysqli_real_escape_string($conn, $_POST['name']);
                       $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
 
-                      $se = "SELECT * FROM register WHERE name = '$user' AND pwd = '$pwd'";
+                      $se = "SELECT * FROM register WHERE name = '$user' AND pwd = '$pwd' AND status ='Active' ";
                       $sel = mysqli_query($conn , $se);
                       $affect_row = mysqli_num_rows($sel);
                       if($affect_row == 1){

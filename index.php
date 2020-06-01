@@ -159,6 +159,7 @@ echo $gat['totalGatePass'];
 </div>
 </div>
 
+<!--
 <div class="row">
 <div class="col-md-4">
 <div class="card ">
@@ -205,6 +206,8 @@ echo $gat['totalGatePass'];
 </div>
 </div>
 </div>
+
+
 <div class="row">
 <div class="col-md-6">
 <div class="card ">
@@ -365,6 +368,10 @@ echo $gat['totalGatePass'];
 </div>
 </div>
 </div>
+-->
+
+
+
 </div>
 </div>
 <?php 

@@ -30,7 +30,7 @@ require_once('header/header.php');
 <div class="col-md-12">
 <div class="card ">
 <div class="card-header ">
-<h4 class="card-title">Add User </h4>
+<h4 class="card-title">Add Staff Account </h4>
 </div>
 <div class="card-body ">
 
@@ -107,7 +107,7 @@ if(isset($_POST['add'])){
 </div>
 
 <div class="row">
-<label class="col-sm-2 control-label"><b> User Name : </b></label>
+<label class="col-sm-2 control-label"><b> Staff Name : </b></label>
 <div class="col-sm-10">
 <div class="form-group has-success">
 <input type="text" name="name" class="form-control" required="">
@@ -187,7 +187,7 @@ if(isset($_POST['add'])){
 <thead>
 <tr>
 <th width="5%"> Serial No.</th>
-<th> User Name</th>
+<th> Staff Name</th>
 <th> Role </th>
 <th> Status </th>
 <th> Pwd </th>

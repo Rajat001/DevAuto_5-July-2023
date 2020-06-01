@@ -230,6 +230,11 @@ require_once('header/conn.php');
 	$serviceBook =mysqli_real_escape_string($conn, $_POST['serviceBook']);
 	$deliveryKm =mysqli_real_escape_string($conn, $_POST['deliveryKm']);
 
+	$select_c = "SELECT `chasisNo` FROM `stockmgmt` WHERE `chasisNo` = '".mysqli_real_escape_string($conn ,$chasisNo)."'";
+	$select_ch = mysqli_query($conn , $select_c);
+	$select_cha = mysqli_fetch_array($select_ch);
+
+	if(mysqli_num_rows($select_ch) == 1){
 
 	$sql = "INSERT INTO `gatepassmgmt`( `gatePassNo`,`chasisNo`,`receiptNo`,`receiptAmt`,`receiptNoOne`,`receiptAmtOne`,`receiptNoTwo`,`receiptAmtTwo`,`receiptNoThree`,`receiptAmtThree`,`receiptNoFour`,`receiptAmtFour`,`receiptNoFive`,`receiptAmtFive`,`receiptNoSix`,`receiptAmtSix`,`receiptNoSeven`,`receiptAmtSeven`,`receiptNoEight`,`receiptAmtEight`,`receiptOptOne`,`receiptOptTwo`,`receiptOptThree`,`receiptOptFour`,`receiptOptFive`,`receiptOptSix`,`receiptOptSeven`,`receiptOptEight`,`idProofCard`,`idProofdoc`,`invoiceDoc`,`insuranceDoc`,`rcDoc`,`salesPerson`,`pD`,`shortItem`,`accessorie`,`subAccessorie`,`currDate`,`paymentReceivable`,`address`,`remark`,`serviceBook`,`deliveryKm`)
 	VALUES ('$gatePassNo','$chasisNo','$receiptdata','$amount','$receiptdatatwo','$amounttwo','$receiptdatathree','$amountthree','$receiptdatafour','$amountfour','$receiptdatafive','$amountfive','$receiptdatasix','$amountsix','$receiptdataseven','$amountseven','$receiptdataeight','$amounteight','$receiptdatanine','$amountnine','$receiptoptionone','$receiptoptiontwo','$receiptoptionthree','$receiptoptionfour','$receiptoptionfive','$receiptoptionsix','$receiptoptionseven','$receiptoptioneight','$idproofdocument','$uploadedFileIdDoc','$uploadedinvoiceDoc','$uploadedinsuranceDoc','$uploadedrcDoc','$salesPerson','$pD','$shortItem','$accessorie','$subAccessorie',CURDATE(),'$paymentReceivable','$address','$remark','$serviceBook','$deliveryKm')";
@@ -252,6 +257,17 @@ require_once('header/conn.php');
 		else {
 		echo "<script> alert('Data Added Success') </script>";		
 		}
+	}else{
+			echo "<p id='errorone' style='text-align:center;
+			background-color: red;
+			border-radius: 6px;
+			color: white;
+			font-size: 22px;
+			'>
+			Chasis No Not Found...
+			</p>";
+	}
+
 
 		}
 		?>
@@ -310,7 +326,7 @@ require_once('header/conn.php');
 		</div>
 
 		<div class="search-box">
-		<input type="text" class="form-control" autocomplete="off" id="chasisNo" name="chasisNo" placeholder="Enter Challan No" style="font-weight: 900; color: crimson;"/ required="">
+		<input type="text" class="form-control" autocomplete="off" id="chasisNo" name="chasisNo" placeholder="Enter Challan No" style="font-weight: 900; color: crimson;" required="">
 		<div class="resultChallanDetails" style="margin-top: 10px;"></div>
 		</div>
 

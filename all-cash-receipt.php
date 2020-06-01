@@ -31,7 +31,7 @@ require_once('header/conn.php');
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="background-color: white; ">
 <thead>
 <tr>
-<th> Serial No.</th>
+
 <th> Receipt No.</th>
 <th> Customer Name</th>
 <th> For</th>
@@ -74,7 +74,7 @@ while ($sel = mysqli_fetch_array($se)) {
 
 
 <tr>
-<td><?php echo $i; ?></td>
+
 <td><?php echo $sel['receiptNo']?></td>
 <td><?php echo $sel['cusName']?></td>
 <td><?php echo $sel['forName']?></td>

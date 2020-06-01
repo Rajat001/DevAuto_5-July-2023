@@ -1,3 +1,4 @@
+<!--    
  <footer class="footer">
                                         <div class="container">
                                             <nav>
@@ -31,6 +32,8 @@
                                             </nav>
                                         </div>
                                     </footer>
+
+                                -->
                                 </div>
                             </div>
                             <div class="fixed-plugin" style="

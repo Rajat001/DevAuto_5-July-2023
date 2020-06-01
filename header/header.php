@@ -83,7 +83,9 @@
                         <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                             <span>  
                                 <!--<b class="caret"></b>-->
+                                <b style="color:#FFFF00;">
                                 <?php echo $_SESSION['name'] ; ?>
+                            </b>
                             </span>
                         </a>                    
                     </div>
@@ -95,8 +97,14 @@
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    
-                                                     <li class="nav-item">
+                    <?php 
+                    include('header/conn.php');
+                    $select_u = "SELECT `name` , `role` FROM `register` WHERE `name` = '".$_SESSION['name']."'";
+                    $select_us = mysqli_query($conn , $select_u);
+                    $select_user = mysqli_fetch_array($select_us); 
+                    if($select_user['role'] == 'admin'){
+                    ?>                    
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#other-Staff-add">
                             <i class="nc-icon nc-notes"></i>
                             <p>
@@ -120,25 +128,18 @@
                                         <span class="sidebar-normal">Add PD</span>
                                     </a>
                                 </li> 
-                                <?php 
-                                include('header/conn.php');
-                                $select_u = "SELECT `name` , `role` FROM `register` WHERE `name` = '".$_SESSION['name']."'";
-                                $select_us = mysqli_query($conn , $select_u);
-                                $select_user = mysqli_fetch_array($select_us); 
-                                if($select_user['role'] == 'admin'){
-                                ?>
+
                                 <li class="nav-item ">
                                     <a class="nav-link" href="add-user.php">
                                         <span class="sidebar-mini">A</span>
-                                        <span class="sidebar-normal">Add User Account</span>
+                                        <span class="sidebar-normal">Add Staff Account</span>
                                     </a>
                                 </li> 
-                                <?php }?>
+                                
                             </ul>
                         </div>                         
                     </li> 
-
-
+<?php }?>
 
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#componentsExamples1">
@@ -158,6 +159,61 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
+
+                                   <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#other-Accessorie-add">
+                            <i class="nc-icon nc-notes"></i>
+                            <p>
+                                Accessorie Section
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse " id="other-Accessorie-add">
+                            <ul class="nav">
+                                
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="add-accessories.php">
+                                        <span class="sidebar-mini">A</span>
+                                        <span class="sidebar-normal">Add Accessories</span>
+                                    </a>
+                                </li> 
+
+                                <li class="nav-item ">
+                                <a class="nav-link" href="add-accessories-detail.php">
+                                <span class="sidebar-mini">A</span>
+                                <span class="sidebar-normal">Add Sub Accessories
+                                </span>
+                                </a>
+                                </li> 
+                            </ul>
+                        </div> 
+                    </li>
+
+                                        <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#other-Finance-add">
+                            <i class="nc-icon nc-notes"></i>
+                            <p>
+                                Finance Section 
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse " id="other-Finance-add">
+                            <ul class="nav">
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="add-paymode.php">
+                                        <span class="sidebar-mini">C</span>
+                                        <span class="sidebar-normal">Add Payment Mode</span>
+                                    </a>
+                                </li>                                                      
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="add-finance.php">
+                                        <span class="sidebar-mini">C</span>
+                                        <span class="sidebar-normal">Add Finance Mode</span>
+                                    </a>
+                                </li> 
+                            </ul>
+                        </div>                         
                     </li>
 
                     <li class="nav-item">
@@ -280,66 +336,6 @@
                         </div>                         
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#other-Finance-add">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>
-                                Finance Section 
-                                <b class="caret"></b>
-                            </p>
-                        </a>
-                        <div class="collapse " id="other-Finance-add">
-                            <ul class="nav">
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="add-paymode.php">
-                                        <span class="sidebar-mini">C</span>
-                                        <span class="sidebar-normal">Add Payment Mode</span>
-                                    </a>
-                                </li>                                                      
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="add-finance.php">
-                                        <span class="sidebar-mini">C</span>
-                                        <span class="sidebar-normal">Add Finance Mode</span>
-                                    </a>
-                                </li> 
-                            </ul>
-                        </div>                         
-                    </li>
-
-       
-
-
-                                        <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#other-Accessorie-add">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>
-                                Accessorie Section
-                                <b class="caret"></b>
-                            </p>
-                        </a>
-                        <div class="collapse " id="other-Accessorie-add">
-                            <ul class="nav">
-                                
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="add-accessories.php">
-                                        <span class="sidebar-mini">A</span>
-                                        <span class="sidebar-normal">Add Accessories</span>
-                                    </a>
-                                </li> 
-
-                                <li class="nav-item ">
-                                <a class="nav-link" href="add-accessories-detail.php">
-                                <span class="sidebar-mini">A</span>
-                                <span class="sidebar-normal">Add Sub Accessories
-                                </span>
-                                </a>
-                                </li> 
-
-                              
-
-                            </ul>
-                        </div>                         
-                    </li>
                 </ul>
             </div>
         </div>

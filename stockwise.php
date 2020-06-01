@@ -340,31 +340,51 @@ require_once('header/conn.php');
 			});
 			}
 				else if($('#challanDate').val() == ""){
+				alert("Please Add Challan Date !!!");	
 				$("#challanDate").focus();
 				}
 				else if($('#challanNo').val() == ""){
+				alert("Please Add Challan No !!!");		
 				$("#challanNo").focus();
 
 				}else if($('#dealerNameIdd').val() == ""){
+				alert("Please Select Dealer Name !!!");
 				$("#dealerNameIdd").focus();
 
 				}else if($('#modelmakenamesection').val() == ""){
+				alert("Please Select Model Make !!!");
 				$("#modelmakenamesection").focus();
-				}else if($('#modelnamesection').val() == ""){
+				}
+				else if($('#modelnamesection').val() == ""){
+				alert("Please Select Model !!!");	
 				$("#modelnamesection").focus();
-				}else if($('#modelSubtype').val() == ""){
+				}
+				else if($('#modelSubtype').val() == ""){
+				alert("Please Select Model SubType !!!");
 				$("#modelSubtype").focus();
-				}else if($('#modelColor').val() == ""){
+				}
+				else if($('#modelColor').val() == ""){
+					alert("Please Select Model Color !!!");
 				$("#modelColor").focus();
-				}else if($('#chasisNo').val() == ""){
+				}
+				else if($('#chasisNo').val() == ""){
+					alert("Please Add Chassis No !!!");
 				$("#chasisNo").focus();
-				}else if($('#engineNo').val() == ""){
+				}
+				else if($('#engineNo').val() == ""){
+					alert("Please Add Engine No. !!!");
 				$("#engineNo").focus();
-				}else if($('#stockLocation').val() == ""){
+				}
+				else if($('#stockLocation').val() == ""){
+					alert("Please Select Stock Location !!!");
 				$("#stockLocation").focus();
-				}else if($('#shortItem').val() == ""){
+				}
+				else if($('#shortItem').val() == ""){
+					alert("Please Add Short Item !!!");
 				$("#shortItem").focus();
-				}else if($('#anyDent').val() == ""){
+				}
+				else if($('#anyDent').val() == ""){
+					alert("Please Add Any Dent !!!");
 				$("#anyDent").focus();
 				}	
 				else{
