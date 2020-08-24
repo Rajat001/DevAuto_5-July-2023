@@ -432,7 +432,7 @@ require_once('header/conn.php');
 		
 		<div class="form-group">
 		<label id="font-color-label"> Initial Amount Paid </label>
-		<input id="amtPaid" name="amtPaid" type="text" placeholder="Enter Amount" class="form-control">
+		<input id="amtPaid" name="amtPaid" type="text" placeholder="Enter Amount" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 		</div>
 		
 		
@@ -545,7 +545,7 @@ require_once('header/conn.php');
 <div class="col-md-4">
 <div class="form-group">
 
-<input type="submit" class="btn btn-fill btn-info" name="add" id="addstockdata11" value="Add Data" >
+<input type="submit" class="btn btn-fill btn-info" name="add" id="addstockdata11" value="Generate" >
 
 </div>
 </div>
@@ -663,6 +663,93 @@ require_once('header/conn.php');
 </div>
 
 </div>
+
+
+
+<div class="container">
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="background-color: white; ">
+<thead>
+<tr>
+
+<th> Receipt No.</th>
+<th> Customer Name</th>
+<th> For</th>
+<th> Finance Mode</th>
+<th> Amount Paid</th>
+<th> Pay Via</th>
+<th> Ex-Vehicle Model</th>
+<th> Ex-Vehicle No </th>
+<th> Ex-Vehicle Amt. </th>
+<th> Print </th>
+
+<?php 
+$select_u = "SELECT `name` , `role` FROM `register` WHERE `name` = '".$_SESSION['name']."'";
+$select_us = mysqli_query($conn , $select_u);
+$select_user = mysqli_fetch_array($select_us); 
+if($select_user['role'] == 'admin'){
+?>
+<th> Updated Date/Time </th>
+
+<?php } ?>
+<th> View/ Edit </th>
+
+</tr>
+</thead>
+
+<tbody>
+
+<?php 
+
+//$s = "select * FROM dealername";
+$s = "SELECT `makername`.`id` , `makername`.`name` AS `makeName` , `dealername`.`makeId` , `dealername`.`name` AS `dealerName` FROM `dealername` LEFT JOIN `makername` ON `makername`.`id` = `dealername`.`makeId`" ;
+
+$s1 = "SELECT * FROM `receiptmgmt`" ;
+
+$se = mysqli_query($conn , $s1);
+$i=0;
+while ($sel = mysqli_fetch_array($se)) {
+	$i++;
+?>
+
+
+<tr>
+
+<td><?php echo $sel['receiptNo']?></td>
+<td><?php echo $sel['cusName']?></td>
+<td><?php echo $sel['forName']?></td>
+<td><?php echo $sel['financeMode']?></td>
+<td><?php echo $sel['amtPaid']?></td>
+<td><?php echo $sel['payVia']?></td>
+<td><?php if($sel['exVehOpt'] == 1){ echo "YES"; } else if($sel['exVehOpt'] == 2){echo "NO";}?></td>
+
+<td><?php echo $sel['exVehModel']?></td>
+<td><?php echo $sel['exVehAmt']?></td>
+
+<?php 
+
+if($select_user['role'] == 'admin'){
+?>
+<td><?php echo $sel['updatedTimeDate']?></td>
+
+<td><a href="edit-cash-receipt.php?id=<?php echo $sel['id']; ?>"><button class="btn btn-primary"> Edit </button></a></td>
+<?php } else {?>
+<td><a href="view-cash-receipt.php?id=<?php echo $sel['id']; ?>"><button class="btn btn-success"> View </button></a></td>
+
+<?php } ?>
+<td><a href="dev-receipt.php?id=<?php echo $sel['id']; ?>"><button class="btn btn-info"> Print </button></a></td>
+</tr>
+
+<?php } ?>
+</tbody>
+</table>
+
+</div>
+
+
+
+
+
+
 
 </div>
 

@@ -7,8 +7,8 @@
 // define('DB_NAMESSa','automart');
 
 //$conn1 = mysqli_connect(HOSTNAMESSa, DB_USERNAMESSa, DB_PASSWORDSSa, DB_NAMESSa);
-
-$conn = mysqli_connect('localhost','root','','automart');
+//$conn = mysqli_connect('localhost','root','','automart');
+$conn = mysqli_connect('localhost','rajat','rajat@9711461442','automart_');
 
 if(!$conn){
 	echo "Server Is Down Please Try After Sometime";

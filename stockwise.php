@@ -407,10 +407,11 @@ require_once('header/conn.php');
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="background-color: white; ">
 <thead>
 <tr>
-<th width="5%"> Serial No.</th>
+<th width="5%"> Stock No.</th>
 <th> Challan Date</th>
 <th> Challan No</th>
 
+<th> Dealer Name</th>
 <th> Model Name</th>
 <th> Model</th>
 <!--
@@ -455,24 +456,24 @@ $model = mysqli_fetch_array($mode);
 
 
 <tr>
-<td><?php echo $i; ?></td>
+<td><?php echo $sel['stockNo']; ?></td>
 <td><?php echo $sel['challanDate']?></td>
 <td><?php echo $sel['challanNo']?></td>
-
+<td>
+<?php 
+$dealer = "SELECT `name` FROM `dealername` WHERE `id` = '".$sel['dealerName']."'";
+$dealer_n = mysqli_query($conn , $dealer);
+$dealer_na = mysqli_fetch_array($dealer_n);
+echo $dealer_na['name'];
+?>
+</td>
 
 <td><?php echo $mod['name']?></td>
 <td><?php echo $model['name']?></td>
-<!--
-<td><?php // echo $sel['modelSubtype']?></td>
-<td><?php // echo $sel['modelColor']?></td>
--->	
+
 <td><?php echo $sel['chasisNo']?></td>
 <td><?php echo $sel['engineNo']?></td>
-<!--
-<td><?php // echo $sel['stockLocation']?></td>
-<td><?php // echo $sel['shortItem']?></td>
-<td><?php // echo $sel['anyDent']?></td>
--->
+
 
 <td>  
 <?php if($sel['status'] == 0 ){
@@ -488,7 +489,7 @@ else if($sel['status'] == 1 ){
 ?>
 </td>
 
-<td> <a href="view-stockwise.php?id=<?php echo $add['id']; ?>"><button class="btn btn-primary">View</button> </a></td>
+<td> <a href="view-stockwise.php?id=<?php echo $sel['id']; ?>"><button class="btn btn-primary">View</button> </a></td>
 
 </tr>
 

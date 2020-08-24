@@ -199,18 +199,43 @@ echo "," . $sel['receiptNoEight'];
 
 </td>
 <td colspan="6" style="border: 1px solid black; font-size: 24px;">
-<p style="font-size: 24px; width: 50px;"> Payment Receivable. <strong>Rs.</strong> 
-<strong class="paymentReceivable"> <?php echo $sel['paymentReceivable']; ?> </strong></p>
+</p>
 
-<p style="font-size: 24px; width: 50px;"> Payment Received 
+<p style="font-size: 24px; width: 50px;"><!-- Balance Amount -->  Vehicle MRP  <strong>
+<?php 
+echo "Rs " . $sel['paymentReceivable']; ;
+?>
+</strong>
+</p>
+
+<p style="font-size: 24px; width: 50px;"> Total Payment Receivable. <strong>Rs.</strong> 
+<strong class="paymentReceivable"> 
+    
+    <?php 
+    //echo $sel['paymentReceivable'];
+    $pay_rececive = $sel['receiptAmt'] + $sel['receiptAmtOne'] + $sel['receiptAmtTwo'] + $sel['receiptAmtThree'] + $sel['receiptAmtFour'] + $sel['receiptAmtFive'] + $sel['receiptAmtSix'] + $sel['receiptAmtSeven'] + 
+        $sel['receiptAmtEight'];
+    echo $pay_rececive ;
+    ?>
+</strong></p>
+
+<p style="font-size: 24px; width: 50px;"> <!-- Payment Received -->  EMI Detail :
 <strong>
 
     Rs. 
 
     <?php 
-    $pay_rececive = $sel['receiptAmt'] + $sel['receiptAmtOne'] + $sel['receiptAmtTwo'] + $sel['receiptAmtThree'] + $sel['receiptAmtFour'] + $sel['receiptAmtFive'] + $sel['receiptAmtSix'] + $sel['receiptAmtSeven'] + 
-        $sel['receiptAmtEight'];
-    echo $pay_rececive;
+    if(!empty($sel['financer_amt'])){
+    echo $sel['financer_amt'];
+    }else{
+        echo "0";
+    }
+    
+
+
+    // $pay_rececive = $sel['receiptAmt'] + $sel['receiptAmtOne'] + $sel['receiptAmtTwo'] + $sel['receiptAmtThree'] + $sel['receiptAmtFour'] + $sel['receiptAmtFive'] + $sel['receiptAmtSix'] + $sel['receiptAmtSeven'] + 
+    //     $sel['receiptAmtEight'];
+    // echo $pay_rececive;
 
     ?>
     <!-- 
@@ -295,12 +320,13 @@ echo "," . $sel['receiptNoEight'];
 <!-- End -->
 
 </p>
-<p style="font-size: 24px; width: 50px;">Balance Amount <strong>Rs. 
+<p style="font-size: 24px; width: 50px;"><!-- Balance Amount -->  EMI / Month :  <strong>
 
 <?php 
-$paymentReceivable = $sel['paymentReceivable'];
-$result =  $paymentReceivable - $pay_rececive;
-echo $result;
+echo $sel['financer_tenure'] . " Months";
+//$paymentReceivable = $sel['paymentReceivable'];
+//$result =  $paymentReceivable - $pay_rececive;
+//echo $result;
 ?>
 
 </strong>  <!-- <strong id="amtbalance"> </strong> --> </p>
@@ -322,22 +348,43 @@ echo $result;
 <p style="width: 50px;">
 
 
-Items Given : <br> <span style="font-weight: 700;"> 
-<u>
+Items Given : 
 
-<?php
-$data = $sel['accessorie'];
-$explode = explode(',', $data);
-foreach($explode as $explodes){
-    
-$a = "SELECT * FROM accessories where id = '".$explodes."'";
-$ac = mysqli_query($conn , $a);
-$acc = mysqli_fetch_array($ac);
-echo wordwrap($acc['name'],25,"<br>\n");
-echo ",";
-}
-?>
-</u> </span> 
+<table style="width:60%; ">
+<tr style=" ">
+<th style="">
+    <?php
+    $acc_data = $sel['accessorie'];
+    $acc_explode = explode(',', $acc_data);
+    foreach($acc_explode as $acc_explodes){
+
+    $a = "SELECT * FROM accessories where id = '".$acc_explodes."'";
+    $ac = mysqli_query($conn , $a);
+    $acc = mysqli_fetch_array($ac);
+
+    echo $acc['name'] ." , " . "<br>";
+    }
+    ?>
+</th>
+<th style="">
+    <?php
+    $sub_acc_data = $sel['subAccessorie'];
+    $sub_acc_explode = explode(',', $sub_acc_data);
+    foreach($sub_acc_explode as $sub_acc_explodes){
+
+    $sub_a = "SELECT * FROM subaccessories where id = '".$sub_acc_explodes."'";
+    $sub_ac = mysqli_query($conn , $sub_a);
+    $sub_acc = mysqli_fetch_array($sub_ac);
+
+    echo " ( " .$sub_acc['name'] ." ) " . "<br>";
+    }
+    ?>
+</th> 
+
+</tr>
+
+
+</table>
 
 </p>
 

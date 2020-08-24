@@ -203,10 +203,10 @@ echo "," . $sel['receiptNoEight'];
 
 </td>
 <td colspan="6" style="border: 1px solid black; font-size: 24px;">
-<p style="font-size: 24px; "> Payment Receivable. <strong>Rs.</strong> 
+<p style="font-size: 24px; ">Total Payment Receivable. <strong>Rs.</strong> 
 <strong class="paymentReceivable"> <?php echo $sel['paymentReceivable']; ?> </strong></p>
 
-<p style="font-size: 24px; "> Payment Received 
+<p style="font-size: 24px; "> <!--Payment Received --> EMI Detail 
 <strong>
 
     Rs. 
@@ -227,7 +227,7 @@ echo "," . $sel['receiptNoEight'];
 <!-- End -->
 
 </p>
-<p style="font-size: 24px;">Balance Amount <strong>Rs. 
+<p style="font-size: 24px;"> <!-- Balance Amount -->  EMI / Month <strong>Rs. 
 
 <?php 
 $paymentReceivable = $sel['paymentReceivable'];
@@ -255,23 +255,44 @@ echo $result;
 <p style="">
 
 
-Items Given : <br> <span style="font-weight: 700;"> 
-<u>
+Items Given : 
+<table style="width:90%; ">
+<tr style=" ">
+<th style="">
+    <?php
+    $acc_data = $sel['accessorie'];
+    $acc_explode = explode(',', $acc_data);
+    foreach($acc_explode as $acc_explodes){
 
-<?php
-$data = $sel['accessorie'];
-$explode = explode(',', $data);
-foreach($explode as $explodes){
-    
-$a = "SELECT * FROM accessories where id = '".$explodes."'";
-$ac = mysqli_query($conn , $a);
-$acc = mysqli_fetch_array($ac);
-//echo wordwrap($acc['name'],25,"<br>\n");
-//echo ",";
-echo $acc['name'];
-}
-?>
-</u> </span> 
+    $a = "SELECT * FROM accessories where id = '".$acc_explodes."'";
+    $ac = mysqli_query($conn , $a);
+    $acc = mysqli_fetch_array($ac);
+
+    echo $acc['name'] ." , " . "<br>";
+    }
+    ?>
+</th>
+<th style=" ">
+    <?php
+    $sub_acc_data = $sel['subAccessorie'];
+    $sub_acc_explode = explode(',', $sub_acc_data);
+    foreach($sub_acc_explode as $sub_acc_explodes){
+
+    $sub_a = "SELECT * FROM subaccessories where id = '".$sub_acc_explodes."'";
+    $sub_ac = mysqli_query($conn , $sub_a);
+    $sub_acc = mysqli_fetch_array($sub_ac);
+
+    echo " ( " .$sub_acc['name'] ." )" . "<br>";
+    }
+    ?>
+</th> 
+
+</tr>
+
+
+</table>
+
+<br> 
 
 </p>
 
@@ -280,7 +301,7 @@ echo $acc['name'];
 
 Items Short Supplied : <br> <u style="font-weight: 700;"> 
      <?php echo wordwrap($sel['shortItem'],40,"<br>\n"); 
-    //echo $sel['shortItem'];
+    
     ?> 
  
 </u> 

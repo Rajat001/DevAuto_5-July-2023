@@ -71,7 +71,7 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                   
-                    <a href="https://www.creative-tim.com/" class="simple-text logo-normal">
+                    <a href="index.php" class="simple-text logo-normal">
                      &nbsp;&nbsp;&nbsp;  <b id="logo-text">Dev</b>AutoMobile
                     </a>
                 </div>
@@ -84,7 +84,7 @@
                             <span>  
                                 <!--<b class="caret"></b>-->
                                 <b style="color:#FFFF00;">
-                                <?php echo $_SESSION['name'] ; ?>
+                                <?php echo ucwords($_SESSION['name']) ; ?>
                             </b>
                             </span>
                         </a>                    
@@ -141,6 +141,50 @@
                     </li> 
 <?php }?>
 
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#componentsExamples2">
+                            <i class="nc-icon nc-app"></i>
+                            <p>
+                               Vehicle Make Name <br> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;    
+                                Section 
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse " id="componentsExamples2">
+                            <ul class="nav">
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="add-make.php">
+                                        <span class="sidebar-mini">A</span>
+                                        <span class="sidebar-normal">Add Name</span>
+                                    </a>
+                                </li>
+                      
+                               <li class="nav-item ">
+                                    <a class="nav-link" href="add-model.php">
+                                        <span class="sidebar-mini">A</span>
+                                        <span class="sidebar-normal">Add Model Name</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="addModelColor.php">
+                                        <span class="sidebar-mini">A</span>
+                                        <span class="sidebar-normal">Add Color</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="addStockLocation.php">
+                                        <span class="sidebar-mini">A</span>
+                                        <span class="sidebar-normal">Add Stock Location</span>
+                                    </a>
+                                </li>                               
+                            </ul>
+                        </div>
+                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#componentsExamples1">
                             <i class="nc-icon nc-app"></i>
@@ -216,48 +260,7 @@
                         </div>                         
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#componentsExamples2">
-                            <i class="nc-icon nc-app"></i>
-                            <p>
-                               Vehicle Make Name <br> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                &nbsp;&nbsp;&nbsp;&nbsp;    
-                                Section 
-                                <b class="caret"></b>
-                            </p>
-                        </a>
-                        <div class="collapse " id="componentsExamples2">
-                            <ul class="nav">
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="add-make.php">
-                                        <span class="sidebar-mini">A</span>
-                                        <span class="sidebar-normal">Add Name</span>
-                                    </a>
-                                </li>
-                      
-                               <li class="nav-item ">
-                                    <a class="nav-link" href="add-model.php">
-                                        <span class="sidebar-mini">A</span>
-                                        <span class="sidebar-normal">Add Model Name</span>
-                                    </a>
-                                </li>
 
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="addModelColor.php">
-                                        <span class="sidebar-mini">A</span>
-                                        <span class="sidebar-normal">Add Color</span>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="addStockLocation.php">
-                                        <span class="sidebar-mini">A</span>
-                                        <span class="sidebar-normal">Add Stock Location</span>
-                                    </a>
-                                </li>                               
-                            </ul>
-                        </div>
-                    </li>
                      
 
                     <li class="nav-item">
@@ -273,9 +276,24 @@
                                 <li class="nav-item ">
                                     <a class="nav-link" href="stockwise.php">
                                         <span class="sidebar-mini">S</span>
-                                        <span class="sidebar-normal">Add Stock</span>
+                                        <span class="sidebar-normal">Add Stock / All Stock </span>
                                     </a>
-                                </li>                           
+                                </li>  
+
+                        <li class="nav-item ">
+                        <a class="nav-link" href="unsold-stock.php">
+                        <span class="sidebar-mini">S</span>
+                        <span class="sidebar-normal">UnSold Stock</span>
+                        </a>
+                        </li>
+                         
+                        <li class="nav-item ">
+                        <a class="nav-link" href="sold-stock.php">
+                        <span class="sidebar-mini">S</span>
+                        <span class="sidebar-normal">Sold Stock</span>
+                        </a>
+                        </li> 
+                 
                             </ul>
                         </div>
                     </li>
@@ -293,7 +311,7 @@
                                 <li class="nav-item ">
                                     <a class="nav-link" href="receipt-wise.php">
                                         <span class="sidebar-mini">C</span>
-                                        <span class="sidebar-normal">Generate Cash Receipt</span>
+                                        <span class="sidebar-normal">Generate Cash Receipt </span>
                                     </a>
                                 </li>
 
@@ -329,7 +347,7 @@
                                 <li class="nav-item ">
                                     <a class="nav-link" href="all-gate-pass.php">
                                         <span class="sidebar-mini">G</span>
-                                        <span class="sidebar-normal"> ALL GatePass</span>
+                                        <span class="sidebar-normal"> All GatePass</span>
                                     </a>
                                 </li>                         
                             </ul>

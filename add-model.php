@@ -121,7 +121,7 @@ While($sel = mysqli_fetch_array($se)){
 <th width="5%"> Sno.</th>
 <th> Make Name</th>
 <th> Model Name</th>
-<th>Action</th>
+
 </tr>
 </thead>
 
@@ -144,7 +144,7 @@ while ($sel = mysqli_fetch_array($se)) {
 <td><?php echo $i; ?></td>
 <td><?php echo $sel['maker_names']?></td>
 <td><?php echo $sel['model_names']?></td>
-<td><button class="btn btn-primary btn-sm">Edit</button></td>
+
 </tr>
 
 <?php } ?>

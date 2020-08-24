@@ -92,7 +92,7 @@ if(isset($_POST['add'])){
 <thead>
 <tr>
 <th width="5%"> Serial No.</th>
-<th> Mode Name</th>
+<th> PAYMENT MODE NAME </th>
 <!--
 <th>Action</th>
 -->

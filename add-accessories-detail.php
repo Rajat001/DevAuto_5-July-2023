@@ -134,9 +134,9 @@ While($sel = mysqli_fetch_array($se)){
 <thead>
 <tr>
 <th width="5%"> Sno.</th>
-<th> Make Name</th>
-<th> Model Name</th>
-<th>Action</th>
+<th> ACCESSORIES NAME</th>
+<th> SUB CATEGORY NAME</th>
+<th> COST</th>
 </tr>
 </thead>
 

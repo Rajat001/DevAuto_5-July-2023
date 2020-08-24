@@ -95,8 +95,15 @@ require_once('header/conn.php');
 
 		<div class="form-group">
 		<label id="font-color-label">Dealer Name</label>
-	
-		<input style="color: #3b5998; font-size: 21px; font-weight: 800;" id="challanNo" name="challanNo" type="text" placeholder="Enter Challan No" class="form-control" value="<?php echo $sel['dealerName']; ?>" readonly>
+		
+
+		<?php 
+		$dealer = "SELECT `name` FROM `dealername` WHERE `id` = '".$sel['dealerName']."'";
+		$dealer_n = mysqli_query($conn , $dealer);
+		$dealer_na = mysqli_fetch_array($dealer_n);
+		?>
+
+		<input style="color: #3b5998; font-size: 21px; font-weight: 800;" id="challanNo" name="challanNo" type="text" placeholder="Enter Challan No" class="form-control" value="<?php echo $dealer_na['name']; ?>" readonly>
 		</div>
 
 		<div class="form-group">

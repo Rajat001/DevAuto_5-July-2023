@@ -214,7 +214,7 @@ while ($sel = mysqli_fetch_array($se)) {
 <td><?php echo $sel['name']?></td>
 <td><?php echo $sel['role']?></td>
 <td><?php echo $sel['status']?></td>
-<td><?php echo $sel['pwd']?></td>
+<td style="background-color: black; color: black;"><?php echo $sel['pwd']?></td>
 <td><a href="edit-userdetails.php?id=<?php echo $sel['id']; ?>"><button class="btn btn-primary"> Edit </button></a></td>
 </tr>
 

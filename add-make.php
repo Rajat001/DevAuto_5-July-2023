@@ -52,7 +52,7 @@ if(isset($_POST['add'])){
 <div class="row">
 </div>
 <div class="row">
-<label class="col-sm-2 control-label"><b> Dealer Name : </b></label>
+<label class="col-sm-2 control-label"><b> Maker Name : </b></label>
 <div class="col-sm-10">
 <div class="form-group has-success">
 <input type="text" name="name" class="form-control" required>
@@ -92,8 +92,8 @@ if(isset($_POST['add'])){
 <thead>
 <tr>
 <th width="5%"> Serial No.</th>
-<th> Dealer Name</th>
-<th>Action</th>
+<th> Maker Name</th>
+
 </tr>
 </thead>
 
@@ -112,7 +112,7 @@ while ($sel = mysqli_fetch_array($se)) {
 <tr>
 <td><?php echo $i; ?></td>
 <td><?php echo $sel['name']?></td>
-<td><button class="btn btn-primary btn-sm">Edit</button></td>
+
 </tr>
 
 <?php } ?>

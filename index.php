@@ -21,7 +21,7 @@ require_once('header/header.php');
 </div>
 <div class="col-7">
 <div class="numbers">
-<p class="card-category">Total Stocks</p>
+<p class="card-category" style="color:orange; font-size: 19px;">Total Stocks</p>
 <h4 class="card-title">
 
 <?php 
@@ -48,7 +48,7 @@ $usold = mysqli_fetch_array($usol);
 ?>
 
 
-Total UnSold : <?php echo $usold['totalStockUnSold'];?>
+<b style="color:black; font-size: 16px;"> Total UnSold : </b> <b style="color:orange; font-size: 18px;"><?php echo $usold['totalStockUnSold'];?> </b>
 <br>
 
 <?php 
@@ -57,7 +57,7 @@ $sol = mysqli_query($conn , $so);
 $sold = mysqli_fetch_array($sol);
 
 ?>
-Total Sold :  <?php echo $sold['totalStockSold'];?>
+<b style="color:black; font-size: 16px;"> Total Sold :  </b> <b style="color:orange; font-size: 18px;"> <?php echo $sold['totalStockSold'];?> </b>
 
 </div>
 </div>
@@ -74,7 +74,7 @@ Total Sold :  <?php echo $sold['totalStockSold'];?>
 </div>
 <div class="col-7">
 <div class="numbers">
-<p class="card-category">Total Cash Receipt </p>
+<p class="card-category" style="color:green; font-size: 19px;">Total Cash Receipt </p>
 <h4 class="card-title">
 	<?php 
 $r = "SELECT COUNT(*) AS totalReceipt FROM receiptmgmt";
@@ -107,7 +107,7 @@ echo $rec['totalReceipt'];
 </div>
 <div class="col-7">
 <div class="numbers">
-<p class="card-category">Total Employee</p>
+<p class="card-category" style="color:red; font-size: 19px;">Total Employee</p>
 <h4 class="card-title">	
 	<?php 
 $s = "SELECT COUNT(*) AS totalSales FROM salesman";
@@ -138,7 +138,7 @@ echo $sal['totalSales'];
 </div>
 <div class="col-7">
 <div class="numbers">
-<p class="card-category">Total Gate Pass Generated</p>
+<p class="card-category" style="color:blue; font-size: 19px;">Total Gate Pass Generated</p>
 <h4 class="card-title"><?php 
 $g = "SELECT COUNT(*) AS totalGatePass FROM gatepassmgmt";
 $ga = mysqli_query($conn , $g);

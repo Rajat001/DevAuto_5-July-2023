@@ -18,8 +18,9 @@
 
 //$conn_acc = new PDO("mysql:host=localhost; dbname=automart;","i3mgyrr8hlzp","9953255919_Ra");
 
-$conn_acc = new PDO("mysql:host=localhost; dbname=automart;","root","");
+//$conn_acc = new PDO("mysql:host=localhost; dbname=automart;","root","");
 
+$conn_acc = new PDO("mysql:host=localhost; dbname=automart_;","rajat","rajat@9711461442");
 
 function fill_select_box($conn_acc, $category_id){ // This Function is Not Working Becoz of [ $category_id ]
 	$query = "SELECT * FROM accessories WHERE id = '".$category_id."'";

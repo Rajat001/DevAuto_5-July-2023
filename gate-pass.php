@@ -224,6 +224,12 @@ require_once('header/conn.php');
 
     $paymentReceivable =mysqli_real_escape_string($conn, $_POST['paymentReceivable']);
 
+    // Added New Section For Finance Section Start
+    $financer_name =mysqli_real_escape_string($conn, $_POST['financer_name']);    
+    $financer_amt =mysqli_real_escape_string($conn, $_POST['financer_amt']);    
+    $financer_tenure =mysqli_real_escape_string($conn, $_POST['financer_tenure']);    
+	// Added New Section For Finance Section End
+
     $address =mysqli_real_escape_string($conn, $_POST['address']);
 	$remark =mysqli_real_escape_string($conn, $_POST['remark']);
 
@@ -236,8 +242,8 @@ require_once('header/conn.php');
 
 	if(mysqli_num_rows($select_ch) == 1){
 
-	$sql = "INSERT INTO `gatepassmgmt`( `gatePassNo`,`chasisNo`,`receiptNo`,`receiptAmt`,`receiptNoOne`,`receiptAmtOne`,`receiptNoTwo`,`receiptAmtTwo`,`receiptNoThree`,`receiptAmtThree`,`receiptNoFour`,`receiptAmtFour`,`receiptNoFive`,`receiptAmtFive`,`receiptNoSix`,`receiptAmtSix`,`receiptNoSeven`,`receiptAmtSeven`,`receiptNoEight`,`receiptAmtEight`,`receiptOptOne`,`receiptOptTwo`,`receiptOptThree`,`receiptOptFour`,`receiptOptFive`,`receiptOptSix`,`receiptOptSeven`,`receiptOptEight`,`idProofCard`,`idProofdoc`,`invoiceDoc`,`insuranceDoc`,`rcDoc`,`salesPerson`,`pD`,`shortItem`,`accessorie`,`subAccessorie`,`currDate`,`paymentReceivable`,`address`,`remark`,`serviceBook`,`deliveryKm`)
-	VALUES ('$gatePassNo','$chasisNo','$receiptdata','$amount','$receiptdatatwo','$amounttwo','$receiptdatathree','$amountthree','$receiptdatafour','$amountfour','$receiptdatafive','$amountfive','$receiptdatasix','$amountsix','$receiptdataseven','$amountseven','$receiptdataeight','$amounteight','$receiptdatanine','$amountnine','$receiptoptionone','$receiptoptiontwo','$receiptoptionthree','$receiptoptionfour','$receiptoptionfive','$receiptoptionsix','$receiptoptionseven','$receiptoptioneight','$idproofdocument','$uploadedFileIdDoc','$uploadedinvoiceDoc','$uploadedinsuranceDoc','$uploadedrcDoc','$salesPerson','$pD','$shortItem','$accessorie','$subAccessorie',CURDATE(),'$paymentReceivable','$address','$remark','$serviceBook','$deliveryKm')";
+	$sql = "INSERT INTO `gatepassmgmt`( `gatePassNo`,`chasisNo`,`receiptNo`,`receiptAmt`,`receiptNoOne`,`receiptAmtOne`,`receiptNoTwo`,`receiptAmtTwo`,`receiptNoThree`,`receiptAmtThree`,`receiptNoFour`,`receiptAmtFour`,`receiptNoFive`,`receiptAmtFive`,`receiptNoSix`,`receiptAmtSix`,`receiptNoSeven`,`receiptAmtSeven`,`receiptNoEight`,`receiptAmtEight`,`receiptOptOne`,`receiptOptTwo`,`receiptOptThree`,`receiptOptFour`,`receiptOptFive`,`receiptOptSix`,`receiptOptSeven`,`receiptOptEight`,`idProofCard`,`idProofdoc`,`invoiceDoc`,`insuranceDoc`,`rcDoc`,`salesPerson`,`pD`,`shortItem`,`accessorie`,`subAccessorie`,`currDate`,`paymentReceivable`,`address`,`remark`,`serviceBook`,`deliveryKm`,`financer_name`,`financer_amt`,`financer_tenure`)
+	VALUES ('$gatePassNo','$chasisNo','$receiptdata','$amount','$receiptdatatwo','$amounttwo','$receiptdatathree','$amountthree','$receiptdatafour','$amountfour','$receiptdatafive','$amountfive','$receiptdatasix','$amountsix','$receiptdataseven','$amountseven','$receiptdataeight','$amounteight','$receiptdatanine','$amountnine','$receiptoptionone','$receiptoptiontwo','$receiptoptionthree','$receiptoptionfour','$receiptoptionfive','$receiptoptionsix','$receiptoptionseven','$receiptoptioneight','$idproofdocument','$uploadedFileIdDoc','$uploadedinvoiceDoc','$uploadedinsuranceDoc','$uploadedrcDoc','$salesPerson','$pD','$shortItem','$accessorie','$subAccessorie',CURDATE(),'$paymentReceivable','$address','$remark','$serviceBook','$deliveryKm','$financer_name','$financer_amt','$financer_tenure')";
 
 		$update = "UPDATE `stockmgmt` SET `status` = '1' WHERE `chasisNo` = '".$chasisNo."'";
 		
@@ -326,7 +332,7 @@ require_once('header/conn.php');
 		</div>
 
 		<div class="search-box">
-		<input type="text" class="form-control" autocomplete="off" id="chasisNo" name="chasisNo" placeholder="Enter Challan No" style="font-weight: 900; color: crimson;" required="">
+		<input type="text" class="form-control" autocomplete="off" id="chasisNo" name="chasisNo" placeholder="Enter Chasis No" style="font-weight: 900; color: crimson;" required="">
 		<div class="resultChallanDetails" style="margin-top: 10px;"></div>
 		</div>
 
@@ -338,7 +344,7 @@ require_once('header/conn.php');
 		<div class="form-group">
 		<label id="font-color-label"><u> Chasis No </u> / <u> Manufacturer </u>  / <u> Model</u> / <u> Colour </u>  / <u> StockLocation </u> </label>
 		
-		<input id="challanCheck" name="" type="text" autocomplete="off" placeholder="Enter Challan No" class="form-control" style="font-weight: 900; color: crimson;">
+		<input id="challanCheck" name="" type="text" autocomplete="off" placeholder="Enter Chasis No" class="form-control" style="font-weight: 900; color: crimson;">
 		</div>	
 
 		<div id="challanCheckList" style="margin-top: 10px;"></div> 	
@@ -2134,10 +2140,81 @@ return true;
 		<div class="card-body ">
 
 		<div class="form-group">
-			<label id="font-color-label">Cost</label>
+			<label id="font-color-label">DownPayment / (On Road Price)</label>
 			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="paymentReceivable" onkeypress="return CostNumeric(event)" required>
 		</div>
 		
+		<div class="form-group">
+		<label id="font-color-label"> Financer Name </label>
+		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financer_name" >
+		</div>
+
+
+
+		<div class="form-group">
+		<label id="font-color-label">Finance Amount</label>
+		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financer_amt" onkeypress="return CostNumeric(event)">
+		</div>
+
+		<div class="form-group">
+		<label id="font-color-label"> Finance Tenure </label>
+		<select name="financer_tenure" class="form-control" >
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="20">20</option>
+		<option value="21">21</option>
+		<option value="22">22</option>
+		<option value="23">23</option>
+		<option value="24">24</option>
+		<option value="25">25</option>
+		<option value="26">26</option>
+		<option value="27">27</option>
+		<option value="28">28</option>
+		<option value="29">29</option>
+		<option value="30">30</option>
+		<option value="31">31</option>
+		<option value="32">32</option>
+		<option value="33">33</option>
+		<option value="34">34</option>
+		<option value="35">35</option>
+		<option value="36">36</option>
+		<option value="37">37</option>
+		<option value="38">38</option>
+		<option value="39">39</option>
+		<option value="40">40</option>
+		<option value="41">41</option>
+		<option value="42">42</option>
+		<option value="43">43</option>
+		<option value="44">44</option>
+		<option value="45">45</option>
+		<option value="46">46</option>
+		<option value="47">47</option>
+		<option value="48">48</option>
+		
+		</select>
+		</div>
+
+
+
+
 		<script type="text/javascript">
 		function CostNumeric(evt){
 		var charCode = (evt.which) ? evt.which : evt.keyCode
@@ -2149,7 +2226,7 @@ return true;
 			
 		<div class="form-group">
 			<label id="font-color-label">Identity Proof (ID Card)</label>
-			<select name="idproofdocument" required class="form-control" >
+			<select name="idproofdocument" class="form-control" >
 				<option value="">Select</option>
 				<option value="Voter Id Card">Voter Id Card</option>
 				<option value="Adhar Card">Adhar Card</option>
@@ -2161,23 +2238,23 @@ return true;
 
 		<div class="form-group">
 		<label id="font-color-label"> Upload ( ID Proof )</label>
-		<input id="idproofdoc" name="idproofdoc" type="file" placeholder="Enter Challan No" class="form-control" required>
+		<input id="idproofdoc" name="idproofdoc" type="file" placeholder="Enter Challan No" class="form-control" >
 		</div>
 
 		<div class="form-group">
 		<label id="font-color-label"> Upload Invoice </label>
-		<input id="invoiceDoc" name="invoiceDoc" type="file" class="form-control" required>
+		<input id="invoiceDoc" name="invoiceDoc" type="file" class="form-control" >
 		</div>
 
 
 		<div class="form-group">
 		<label id="font-color-label"> Upload Insurance  </label>
-		<input id="insuranceDoc" name="insuranceDoc" type="file" class="form-control" required>
+		<input id="insuranceDoc" name="insuranceDoc" type="file" class="form-control" >
 		</div>
 
 		<div class="form-group">
 		<label id="font-color-label"> Upload RC  </label>
-		<input id="rcDoc" name="rcDoc" type="file" class="form-control" required="">
+		<input id="rcDoc" name="rcDoc" type="file" class="form-control" >
 		</div>
 
 		<!-- Apply Ckeditor Here Starts-->

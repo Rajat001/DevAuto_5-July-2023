@@ -41,7 +41,7 @@ require_once('header/conn.php');
 <th> Ex-Vehicle Model</th>
 <th> Ex-Vehicle No </th>
 <th> Ex-Vehicle Amt. </th>
-<th> Print </th>
+<th> Update Date </th>
 
 <?php 
 $select_u = "SELECT `name` , `role` FROM `register` WHERE `name` = '".$_SESSION['name']."'";
@@ -78,7 +78,18 @@ while ($sel = mysqli_fetch_array($se)) {
 <td><?php echo $sel['receiptNo']?></td>
 <td><?php echo $sel['cusName']?></td>
 <td><?php echo $sel['forName']?></td>
-<td><?php echo $sel['financeMode']?></td>
+<td>
+
+	 <?php
+	$fi = "SELECT `name` FROM financemode WHERE `id` = '".$sel['financeMode']."'";	
+	$fin = mysqli_query($conn ,$fi);
+	$fina = mysqli_fetch_array($fin);
+    echo $fina['name'];
+	?> 
+	
+		
+
+	</td>
 <td><?php echo $sel['amtPaid']?></td>
 <td><?php echo $sel['payVia']?></td>
 <td><?php if($sel['exVehOpt'] == 1){ echo "YES"; } else if($sel['exVehOpt'] == 2){echo "NO";}?></td>
