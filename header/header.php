@@ -1,3 +1,10 @@
+<?php 
+
+if(!isset($_SESSION['name'])){
+echo "<script> window.open('login.php', '_self')</script>";
+}else{
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -393,3 +400,4 @@
                 </div>
             </nav>
             <!-- End Navbar -->
+<?php } ?>

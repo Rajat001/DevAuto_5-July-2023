@@ -23,7 +23,9 @@ if(!empty(isset($_POST['challanCheck']))){
               $sem = mysqli_query($conn , $sm);
               $selm = mysqli_fetch_array($sem);
 
-              $output .= '<li>'.$row["chasisNo"] ." , ". $sel["name"] ." , " . $selm['name']  . " , " .$row["stockLocation"] .'</li>';
+              //$output .= '<li>'.$row["chasisNo"] ." , ". $sel["name"] ." , " . $selm['name']  . " , " .$row["stockLocation"] .'</li>';
+
+			  $output .= '<li>'.$row["chasisNo"] .'</li>';
 		}
 	}else{
 		$output .= '<li> Chasis No Not Found </li>';

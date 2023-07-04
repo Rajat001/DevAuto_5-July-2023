@@ -41,6 +41,10 @@ require_once('header/conn.php');
     	font-size: larger;
     	width: auto;
 	}
+	.finance{
+		color :#ff0080;
+	}
+
 </style>
 
 
@@ -163,8 +167,6 @@ require_once('header/conn.php');
 	$amountnine =mysqli_real_escape_string($conn, $_POST['amountnine']);
 }	
 
-
-
 	$idproofdocument =mysqli_real_escape_string($conn, $_POST['idproofdocument']);
 	
 	//idproofdoc
@@ -226,7 +228,7 @@ require_once('header/conn.php');
 
     // Added New Section For Finance Section Start
     $financer_name =mysqli_real_escape_string($conn, $_POST['financer_name']);    
-    $financer_amt =mysqli_real_escape_string($conn, $_POST['financer_amt']);    
+    //$financer_amt =mysqli_real_escape_string($conn, $_POST['financer_amt']);    
     $financer_tenure =mysqli_real_escape_string($conn, $_POST['financer_tenure']);    
 	// Added New Section For Finance Section End
 
@@ -235,6 +237,38 @@ require_once('header/conn.php');
 
 	$serviceBook =mysqli_real_escape_string($conn, $_POST['serviceBook']);
 	$deliveryKm =mysqli_real_escape_string($conn, $_POST['deliveryKm']);
+	$insuranceOpted =mysqli_real_escape_string($conn, $_POST['insuranceOpted']);
+	$cr_no =mysqli_real_escape_string($conn, $_POST['cr_no']);
+	$soldOnFinanceCheck =mysqli_real_escape_string($conn, $_POST['soldOnFinanceCheck']);
+
+
+	if($soldOnFinanceCheck == 1)
+	{
+		$financeBy = "nil";
+		$doNo = "nil";
+		$financeDseName = "nil";
+		$financeDetailsCheckBy = "nil";
+		$dp = "nil";
+	}
+	else if($soldOnFinanceCheck == 2)
+	{
+		$financeBy =mysqli_real_escape_string($conn, $_POST['financeBy']);
+		$doNo =mysqli_real_escape_string($conn, $_POST['doNo']);
+		$financeDseName =mysqli_real_escape_string($conn, $_POST['financeDseName']);
+		$financeDetailsCheckBy =mysqli_real_escape_string($conn, $_POST['financeDetailsCheckBy']);
+		$dp =mysqli_real_escape_string($conn, $_POST['dp']);
+	}
+
+
+	// echo $soldOnFinanceCheck;
+	// echo $financeBy;
+	// echo $doNo;
+	// echo $financeDseName;
+	// echo $financeDetailsCheckBy;
+	// echo $dp;
+
+	// die();
+
 
 	$select_c = "SELECT `chasisNo` FROM `stockmgmt` WHERE `chasisNo` = '".mysqli_real_escape_string($conn ,$chasisNo)."'";
 	$select_ch = mysqli_query($conn , $select_c);
@@ -242,26 +276,45 @@ require_once('header/conn.php');
 
 	if(mysqli_num_rows($select_ch) == 1){
 
-	$sql = "INSERT INTO `gatepassmgmt`( `gatePassNo`,`chasisNo`,`receiptNo`,`receiptAmt`,`receiptNoOne`,`receiptAmtOne`,`receiptNoTwo`,`receiptAmtTwo`,`receiptNoThree`,`receiptAmtThree`,`receiptNoFour`,`receiptAmtFour`,`receiptNoFive`,`receiptAmtFive`,`receiptNoSix`,`receiptAmtSix`,`receiptNoSeven`,`receiptAmtSeven`,`receiptNoEight`,`receiptAmtEight`,`receiptOptOne`,`receiptOptTwo`,`receiptOptThree`,`receiptOptFour`,`receiptOptFive`,`receiptOptSix`,`receiptOptSeven`,`receiptOptEight`,`idProofCard`,`idProofdoc`,`invoiceDoc`,`insuranceDoc`,`rcDoc`,`salesPerson`,`pD`,`shortItem`,`accessorie`,`subAccessorie`,`currDate`,`paymentReceivable`,`address`,`remark`,`serviceBook`,`deliveryKm`,`financer_name`,`financer_amt`,`financer_tenure`)
-	VALUES ('$gatePassNo','$chasisNo','$receiptdata','$amount','$receiptdatatwo','$amounttwo','$receiptdatathree','$amountthree','$receiptdatafour','$amountfour','$receiptdatafive','$amountfive','$receiptdatasix','$amountsix','$receiptdataseven','$amountseven','$receiptdataeight','$amounteight','$receiptdatanine','$amountnine','$receiptoptionone','$receiptoptiontwo','$receiptoptionthree','$receiptoptionfour','$receiptoptionfive','$receiptoptionsix','$receiptoptionseven','$receiptoptioneight','$idproofdocument','$uploadedFileIdDoc','$uploadedinvoiceDoc','$uploadedinsuranceDoc','$uploadedrcDoc','$salesPerson','$pD','$shortItem','$accessorie','$subAccessorie',CURDATE(),'$paymentReceivable','$address','$remark','$serviceBook','$deliveryKm','$financer_name','$financer_amt','$financer_tenure')";
+	$sql = "INSERT INTO `gatepassmgmt`( `gatePassNo`,`chasisNo`,`receiptNo`,`receiptAmt`,`receiptNoOne`,`receiptAmtOne`,
+	`receiptNoTwo`,`receiptAmtTwo`,`receiptNoThree`,`receiptAmtThree`,`receiptNoFour`,`receiptAmtFour`,`receiptNoFive`,
+	`receiptAmtFive`,`receiptNoSix`,`receiptAmtSix`,`receiptNoSeven`,`receiptAmtSeven`,`receiptNoEight`,`receiptAmtEight`,
+	`receiptOptOne`,`receiptOptTwo`,`receiptOptThree`,`receiptOptFour`,`receiptOptFive`,`receiptOptSix`,`receiptOptSeven`,
+	`receiptOptEight`,`idProofCard`,`idProofdoc`,`invoiceDoc`,`insuranceDoc`,`rcDoc`,`salesPerson`,`pD`,`shortItem`,`accessorie`,
+	`subAccessorie`,`currDate`,`paymentReceivable`,`address`,`remark`,`serviceBook`,`deliveryKm`,`financer_name`,`financer_tenure`,
+	soldOnFinanceCheck, financeBy, doNo, financeDseName, financeDetailsCheckBy, dp, insuranceOpted , cr_no)
+	VALUES ('$gatePassNo','$chasisNo','$receiptdata','$amount','$receiptdatatwo','$amounttwo','$receiptdatathree','$amountthree',
+	'$receiptdatafour','$amountfour','$receiptdatafive','$amountfive','$receiptdatasix','$amountsix','$receiptdataseven',
+	'$amountseven','$receiptdataeight','$amounteight','$receiptdatanine','$amountnine','$receiptoptionone','$receiptoptiontwo',
+	'$receiptoptionthree','$receiptoptionfour','$receiptoptionfive','$receiptoptionsix','$receiptoptionseven','$receiptoptioneight',
+	'$idproofdocument','$uploadedFileIdDoc','$uploadedinvoiceDoc','$uploadedinsuranceDoc','$uploadedrcDoc','$salesPerson','$pD',
+	'$shortItem','$accessorie','$subAccessorie',CURDATE(),'$paymentReceivable','$address','$remark','$serviceBook','$deliveryKm',
+	'$financer_name','$financer_tenure' , '$soldOnFinanceCheck', '$financeBy', '$doNo', '$financeDseName', 
+	'$financeDetailsCheckBy', '$dp' , '$insuranceOpted' , '$cr_no')";
 
+	// die();
+	
 		$update = "UPDATE `stockmgmt` SET `status` = '1' WHERE `chasisNo` = '".$chasisNo."'";
 		
 		$update_query = mysqli_query($conn, $update);
 		
 		$date_add_work =  mysqli_query($conn, $sql);
 
+		// echo mysqli_error($conn);
+		// die();
+
 		$last_id = mysqli_insert_id($conn);
 
 		//echo "Error Is" . mysqli_error($conn);
 
-		if ($date_add_work && $update_query) {
-
-		echo "<script> alert('Data Added Success') </script>";	
-		echo "<script> window.location.href = 'gatepass-receipt.php?id=$last_id'; </script>";
+		if ($date_add_work && $update_query) 
+		{
+			echo "<script> alert('Data Added Success') </script>";	
+			echo "<script> window.location.href = 'gatepass-receipt.php?id=$last_id'; </script>";
 		} 
-		else {
-		echo "<script> alert('Data Added Success') </script>";		
+		else 
+		{
+			echo "<script> alert('Data Added Success 2') </script>";		
 		}
 	}else{
 			echo "<p id='errorone' style='text-align:center;
@@ -327,24 +380,26 @@ require_once('header/conn.php');
 		});
 		</script> -->
 
-		<div class="form-group">
+		<!-- <div class="form-group">
 		<label id="font-color-label"> Chasis No. </label>
 		</div>
 
 		<div class="search-box">
-		<input type="text" class="form-control" autocomplete="off" id="chasisNo" name="chasisNo" placeholder="Enter Chasis No" style="font-weight: 900; color: crimson;" required="">
+		<input type="text" class="form-control" autocomplete="off" id="chasisNo" name="chasisNo" 
+			placeholder="Enter Chasis No" style="font-weight: 900; color: crimson;" required="">
 		<div class="resultChallanDetails" style="margin-top: 10px;"></div>
-		</div>
+		</div> -->
 
 		<!-- Here End For Typehead Concepts -->
 		
-		<center id="font-color-label" style="color: ;">OR</center>
-		<center id="font-color-label" style="color: blue;">( Check Details Using Chasis No ) </center>
+		<!-- <center id="font-color-label" style="color: ;">OR</center>
+		<center id="font-color-label" style="color: blue;">( Check Details Using Chasis No ) </center> -->
 
 		<div class="form-group">
-		<label id="font-color-label"><u> Chasis No </u> / <u> Manufacturer </u>  / <u> Model</u> / <u> Colour </u>  / <u> StockLocation </u> </label>
-		
-		<input id="challanCheck" name="" type="text" autocomplete="off" placeholder="Enter Chasis No" class="form-control" style="font-weight: 900; color: crimson;">
+		<!-- <label id="font-color-label"><u> Chasis No </u> / <u> Manufacturer </u>  / <u> Model</u> / <u> Colour </u>  / <u> StockLocation </u> </label> -->
+		<label id="font-color-label"> Chasis No (Search / Add Chasis No )</label>
+
+		<input id="challanCheck" name="chasisNo" type="text" autocomplete="off" placeholder="Enter Chasis No" class="form-control" style="font-weight: 900; color: crimson;" required="">
 		</div>	
 
 		<div id="challanCheckList" style="margin-top: 10px;"></div> 	
@@ -2140,10 +2195,89 @@ return true;
 		<div class="card-body ">
 
 		<div class="form-group">
-			<label id="font-color-label">DownPayment / (On Road Price)</label>
+			<label id="font-color-label">(On Road Price)</label>
 			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="paymentReceivable" onkeypress="return CostNumeric(event)" required>
 		</div>
+
+		<!-- Finance section is added ~~ start -->
+		<div class="form-group">
+			<label id="font-color-label">Sold On Finance</label>
+			<select id="soldOnFinanceCheck" name="soldOnFinanceCheck" class="form-control">
+			<option value="1"> No </option>
+			<option value="2"> Yes </option>
+			</select>
+		</div>
+
+		<div id="soldOnFinanceCheckShow" style="display:none;">
+		<div class="form-group">
+			<label id="font-color-label" style="color : #7200ff;">Finance By</label>
+			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financeBy" id="financeBy">
+		</div>
 		
+		<div class="form-group">
+			<label id="font-color-label" style="color : #7200ff;">DO NO</label>
+			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="doNo" id="doNo">
+		</div>
+
+		<div class="form-group">
+			<label id="font-color-label" style="color : #7200ff;" >Finance DSE name</label><br>
+			<select name="financeDseName" id="financeDseName" class="form-control" >
+				FINANCE DSE NAME
+			<option value="">Select</option>
+			<?php 
+			$s = "SELECT * FROM financemode ORDER BY name DESC";
+			$se = mysqli_query($conn, $s);
+			While($sel = mysqli_fetch_array($se)){
+			?>
+			<option value="<?php echo $sel['id']; ?>"><?php echo $sel['name']; ?></option>
+			<?php } ?>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label id="font-color-label" style="color : #7200ff;">Finance Details Check By</label>
+			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financeDetailsCheckBy" 
+				   id="financeDetailsCheckBy">
+		</div>
+
+		<div class="form-group">
+			<label id="font-color-label" style="color : #7200ff;">DP</label>
+			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="dp" id="dp">
+		</div>
+
+
+		</div>
+
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+		$('#soldOnFinanceCheck').on('change', function() {
+		if ( this.value == '2')
+		{
+		$("#soldOnFinanceCheckShow").show();
+		}
+		else if (this.value == '1')
+		{
+		$("#soldOnFinanceCheckShow").hide();
+		}
+		})
+		});
+		</script>
+		<!-- Finance section is added ~~ end -->
+
+		<div class="form-group">
+			<label id="font-color-label">Insurance Opted</label>
+			<select id="insuranceOpted" name="insuranceOpted" class="form-control">
+			<option value="1"> ZERO DEP </option>
+			<option value="2"> NON ZERO DEP </option>
+			</select>
+		</div>
+
+		<div class="form-group">
+		<label id="font-color-label"> CR NO </label>
+		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="cr_no" >
+		</div>	
+
 		<div class="form-group">
 		<label id="font-color-label"> Financer Name </label>
 		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financer_name" >
@@ -2151,10 +2285,10 @@ return true;
 
 
 
-		<div class="form-group">
+		<!-- <div class="form-group">
 		<label id="font-color-label">Finance Amount</label>
 		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financer_amt" onkeypress="return CostNumeric(event)">
-		</div>
+		</div> -->
 
 		<div class="form-group">
 		<label id="font-color-label"> Finance Tenure </label>

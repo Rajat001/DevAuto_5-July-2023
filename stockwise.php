@@ -5,7 +5,7 @@ echo "<script> window.open('login.php', '_self')</script>";
 }else{
 
 require_once('header/header.php');
-require_once('header/conn.php');
+require_once('header/conn.php');	
 ?>
 
 <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">

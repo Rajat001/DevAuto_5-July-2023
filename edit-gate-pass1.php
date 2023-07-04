@@ -273,6 +273,32 @@ echo "<script> window.open('all-gate-pass.php', '_self')</script>";
 	$serviceBook =mysqli_real_escape_string($conn, $_POST['serviceBook']);
 	$deliveryKm =mysqli_real_escape_string($conn, $_POST['deliveryKm']);
 
+	
+	$insuranceOpted =mysqli_real_escape_string($conn, $_POST['insuranceOpted']);
+	$cr_no =mysqli_real_escape_string($conn, $_POST['cr_no']);
+	$financer_name =mysqli_real_escape_string($conn, $_POST['financer_name']);
+	$financer_tenure =mysqli_real_escape_string($conn, $_POST['financer_tenure']);
+
+	$soldOnFinanceCheck =mysqli_real_escape_string($conn, $_POST['soldOnFinanceCheck']);
+
+
+	if($soldOnFinanceCheck == 1)
+	{
+		$financeBy = "nil";
+		$doNo = "nil";
+		$financeDseName = "nil";
+		$financeDetailsCheckBy = "nil";
+		$dp = "nil";
+	}
+	else if($soldOnFinanceCheck == 2)
+	{
+		$financeBy =mysqli_real_escape_string($conn, $_POST['financeBy']);
+		$doNo =mysqli_real_escape_string($conn, $_POST['doNo']);
+		$financeDseName =mysqli_real_escape_string($conn, $_POST['financeDseName']);
+		$financeDetailsCheckBy =mysqli_real_escape_string($conn, $_POST['financeDetailsCheckBy']);
+		$dp =mysqli_real_escape_string($conn, $_POST['dp']);
+	}
+
 			if($_POST['accessorie_update'] == 1) {
 			$accessorie_update = $_POST['accessorie_update'];
 			$update = "UPDATE `gatepassmgmt` SET `chasisNo` = '$chasisNo' , 
@@ -316,7 +342,17 @@ echo "<script> window.open('all-gate-pass.php', '_self')</script>";
 			`insuranceDoc` = '$uploadedinsuranceDoc' ,
 			`rcDoc` = '$uploadedrcDoc' ,
 			`updatedTimeDate` = NOW(),
-			`accessorie_update` = '$accessorie_update' WHERE id = '".$_GET['id']."' ";
+			`accessorie_update` = '$accessorie_update',
+			`insuranceOpted` = '$insuranceOpted',
+			`cr_no` = '$cr_no',
+			`financer_name` = '$financer_name',
+			`financer_tenure` = '$financer_tenure',
+			`financeBy` = '$financeBy',
+			`doNo` = '$doNo',
+			`financeDseName` = '$financeDseName',
+			`financeDetailsCheckBy` = '$financeDetailsCheckBy',
+			`dp` = '$dp'
+			 WHERE id = '".$_GET['id']."' ";
 
 			$update_query = mysqli_query($conn, $update);
 			
@@ -377,7 +413,17 @@ echo "<script> window.open('all-gate-pass.php', '_self')</script>";
 			`insuranceDoc` = '$uploadedinsuranceDoc' ,
 			`rcDoc` = '$uploadedrcDoc' ,
 			`updatedTimeDate` = NOW(),
-			`accessorie_update` = '$accessorie_update' WHERE id = '".$_GET['id']."' ";
+			`accessorie_update` = '$accessorie_update',
+			`insuranceOpted` = '$insuranceOpted',
+			`cr_no` = '$cr_no',
+			`financer_name` = '$financer_name',
+			`financer_tenure` = '$financer_tenure',
+			`financeBy` = '$financeBy',
+			`doNo` = '$doNo',
+			`financeDseName` = '$financeDseName',
+			`financeDetailsCheckBy` = '$financeDetailsCheckBy',
+			`dp` = '$dp'
+			 WHERE id = '".$_GET['id']."' ";
 
 			$update_query = mysqli_query($conn, $update);
 
@@ -2378,9 +2424,88 @@ return true;
 		<div class="card-body ">
 
 		<div class="form-group">
-			<label id="font-color-label">Cost</label>
+			<label id="font-color-label">(ON ROAD PRICE)</label>
 			<input type="text" class="form-control" style="font-weight: 900; color: crimson;" value="<?php echo $gate['paymentReceivable'];?>" name="paymentReceivable" id="paymentReceivable" onkeypress="return CostNumeric(event)">
 		</div>
+
+				<!-- Finance section is added ~~ start -->
+				<div class="form-group">
+			<label id="font-color-label">Sold On Finance</label>
+			<select id="soldOnFinanceCheck" name="soldOnFinanceCheck" class="form-control">
+			<option value="1" <?php if($gate['soldOnFinanceCheck'] == 1) {echo "selected"; } ?>> No </option>
+			<option value="2" <?php if($gate['soldOnFinanceCheck'] == 2) {echo "selected"; } ?>> Yes </option>
+			</select>
+		</div>
+
+		<div id="soldOnFinanceCheckShow" style="display:none;">
+		<div class="form-group">
+			<label id="font-color-label" style="color : #7200ff;">Finance By</label>
+			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financeBy" id="financeBy" 
+			value="<?php echo $gate['financeBy']; ?>">
+		</div>
+		
+		<div class="form-group">
+			<label id="font-color-label" style="color : #7200ff;">DO NO</label>
+			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="doNo" id="doNo" 
+			value="<?php echo $gate['doNo']; ?>">
+		</div>
+
+		<div class="form-group">
+			<label id="font-color-label" style="color : #7200ff;" >Finance DSE name</label><br>
+			<select name="financeDseName" id="financeDseName" class="form-control" >
+				FINANCE DSE NAME
+			<?php 
+			$s = "SELECT * FROM financemode ORDER BY name DESC";
+			$se = mysqli_query($conn, $s);
+			While($sel = mysqli_fetch_array($se)){
+			?>
+			<option value="<?php echo $sel['id']; ?>" <?php if($gate['financeDseName'] == $sel['id']){echo "selected";}?>><?php echo $sel['name']; ?></option>
+			<?php } ?>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label id="font-color-label" style="color : #7200ff;">Finance Details Check By</label>
+			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financeDetailsCheckBy" 
+				   id="financeDetailsCheckBy" value="<?php echo $gate['financeDetailsCheckBy']; ?>">
+		</div>
+
+		<div class="form-group">
+			<label id="font-color-label" style="color : #7200ff;">DP</label>
+			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="dp" id="dp" value="<?php echo $gate['dp']; ?>">
+		</div>
+
+
+		</div>
+
+
+		<script type="text/javascript">
+
+		window.onload = function() {
+		var divElement = document.getElementById("soldOnFinanceCheck");
+		var soldOnFinanceCheckShow = document.getElementById("soldOnFinanceCheckShow");
+		if (divElement.id === "2") {
+			soldOnFinanceCheckShow.style.display = "block"; // show the div
+		} else if (divElement.id === "1") {
+			soldOnFinanceCheckShow.style.display = "none"; // hide the div
+		}
+		};
+
+
+		$(document).ready(function(){
+		$('#soldOnFinanceCheck').on('change', function() {
+		if ( this.value == '2')
+		{
+		$("#soldOnFinanceCheckShow").show();
+		}
+		else if (this.value == '1')
+		{
+		$("#soldOnFinanceCheckShow").hide();
+		}
+		})
+		});
+		</script>
+		<!-- Finance section is added ~~ end -->
 		
 		<script type="text/javascript">
 		function CostNumeric(evt){
@@ -2391,6 +2516,83 @@ return true;
 		}
 		</script>
 			
+
+		<div class="form-group">
+		<label id="font-color-label">Insurance Opted</label>
+		<select id="insuranceOpted" name="insuranceOpted" class="form-control">
+		<option value="1" <?php if($gate['insuranceOpted'] == 1){echo "selected";}?>> ZERO DEP </option>
+		<option value="2" <?php if($gate['insuranceOpted'] == 2){echo "selected";}?>> NON ZERO DEP </option>
+		</select>
+		</div>
+
+
+		<div class="form-group">
+		<label id="font-color-label"> CR NO </label>
+		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="cr_no" value="<?php echo $gate['cr_no']; ?>">
+		</div>	
+
+		<div class="form-group">
+		<label id="font-color-label"> Financer Name </label>
+		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financer_name"  value="<?php echo $gate['financer_name']; ?>">
+		</div>
+
+
+		<div class="form-group">
+		<label id="font-color-label"> Finance Tenure </label>
+		<select name="financer_tenure" class="form-control" >
+		<option value="0" <?php if($gate['financer_tenure'] == 0){echo "selected";}?> >0</option>
+		<option value="1" <?php if($gate['financer_tenure'] == 1){echo "selected";}?> >1</option>
+		<option value="2" <?php if($gate['financer_tenure'] == 2){echo "selected";}?> >2</option>
+		<option value="3" <?php if($gate['financer_tenure'] == 3){echo "selected";}?> >3</option>
+		<option value="4" <?php if($gate['financer_tenure'] == 4){echo "selected";}?> >4</option>
+		<option value="5" <?php if($gate['financer_tenure'] == 5){echo "selected";}?> >5</option>
+		<option value="6" <?php if($gate['financer_tenure'] == 6){echo "selected";}?> >6</option>
+		<option value="7" <?php if($gate['financer_tenure'] == 7){echo "selected";}?> >7</option>
+		<option value="8" <?php if($gate['financer_tenure'] == 8){echo "selected";}?> >8</option>
+		<option value="9" <?php if($gate['financer_tenure'] == 9){echo "selected";}?> >9</option>
+		<option value="10" <?php if($gate['financer_tenure'] == 10){echo "selected";}?> >10</option>
+		<option value="11" <?php if($gate['financer_tenure'] == 11){echo "selected";}?> >11</option>
+		<option value="12" <?php if($gate['financer_tenure'] == 12){echo "selected";}?> >12</option>
+		<option value="13" <?php if($gate['financer_tenure'] == 13){echo "selected";}?> >13</option>
+		<option value="14" <?php if($gate['financer_tenure'] == 14){echo "selected";}?> >14</option>
+		<option value="15" <?php if($gate['financer_tenure'] == 15){echo "selected";}?> >15</option>
+		<option value="16" <?php if($gate['financer_tenure'] == 16){echo "selected";}?> >16</option>
+		<option value="17" <?php if($gate['financer_tenure'] == 17){echo "selected";}?> >17</option>
+		<option value="18" <?php if($gate['financer_tenure'] == 18){echo "selected";}?> >18</option>
+		<option value="19" <?php if($gate['financer_tenure'] == 19){echo "selected";}?> >19</option>
+		<option value="20" <?php if($gate['financer_tenure'] == 20){echo "selected";}?> >20</option>
+		<option value="21" <?php if($gate['financer_tenure'] == 21){echo "selected";}?> >21</option>
+		<option value="22" <?php if($gate['financer_tenure'] == 22){echo "selected";}?> >22</option>
+		<option value="23" <?php if($gate['financer_tenure'] == 23){echo "selected";}?> >23</option>
+		<option value="24" <?php if($gate['financer_tenure'] == 24){echo "selected";}?> >24</option>
+		<option value="25" <?php if($gate['financer_tenure'] == 25){echo "selected";}?> >25</option>
+		<option value="26" <?php if($gate['financer_tenure'] == 26){echo "selected";}?> >26</option>
+		<option value="27" <?php if($gate['financer_tenure'] == 27){echo "selected";}?> >27</option>
+		<option value="28" <?php if($gate['financer_tenure'] == 28){echo "selected";}?> >28</option>
+		<option value="29" <?php if($gate['financer_tenure'] == 29){echo "selected";}?> >29</option>
+		<option value="30" <?php if($gate['financer_tenure'] == 30){echo "selected";}?> >30</option>
+		<option value="31" <?php if($gate['financer_tenure'] == 31){echo "selected";}?> >31</option>
+		<option value="32" <?php if($gate['financer_tenure'] == 32){echo "selected";}?> >32</option>
+		<option value="33" <?php if($gate['financer_tenure'] == 33){echo "selected";}?> >33</option>
+		<option value="34" <?php if($gate['financer_tenure'] == 34){echo "selected";}?> >34</option>
+		<option value="35" <?php if($gate['financer_tenure'] == 35){echo "selected";}?> >35</option>
+		<option value="36" <?php if($gate['financer_tenure'] == 36){echo "selected";}?> >36</option>
+		<option value="37" <?php if($gate['financer_tenure'] == 37){echo "selected";}?> >37</option>
+		<option value="38" <?php if($gate['financer_tenure'] == 38){echo "selected";}?> >38</option>
+		<option value="39" <?php if($gate['financer_tenure'] == 39){echo "selected";}?> >39</option>
+		<option value="40" <?php if($gate['financer_tenure'] == 40){echo "selected";}?> >40</option>
+		<option value="41" <?php if($gate['financer_tenure'] == 41){echo "selected";}?> >41</option>
+		<option value="42" <?php if($gate['financer_tenure'] == 42){echo "selected";}?> >42</option>
+		<option value="43" <?php if($gate['financer_tenure'] == 43){echo "selected";}?> >43</option>
+		<option value="44" <?php if($gate['financer_tenure'] == 44){echo "selected";}?> >44</option>
+		<option value="45" <?php if($gate['financer_tenure'] == 45){echo "selected";}?> >45</option>
+		<option value="46" <?php if($gate['financer_tenure'] == 46){echo "selected";}?> >46</option>
+		<option value="47" <?php if($gate['financer_tenure'] == 47){echo "selected";}?> >47</option>
+		<option value="48" <?php if($gate['financer_tenure'] == 48){echo "selected";}?> >48</option>
+		
+		</select>
+		</div>
+
 		<div class="form-group">
 			<label id="font-color-label">Identity Proof (ID Card)</label>
 			<select id="idproofdocument" name="idproofdocument" class="form-control" >
