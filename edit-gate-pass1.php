@@ -276,7 +276,7 @@ echo "<script> window.open('all-gate-pass.php', '_self')</script>";
 	
 	$insuranceOpted =mysqli_real_escape_string($conn, $_POST['insuranceOpted']);
 	$cr_no =mysqli_real_escape_string($conn, $_POST['cr_no']);
-	$financer_name =mysqli_real_escape_string($conn, $_POST['financer_name']);
+	//$financer_name =mysqli_real_escape_string($conn, $_POST['financer_name']);
 	$financer_tenure =mysqli_real_escape_string($conn, $_POST['financer_tenure']);
 
 	$soldOnFinanceCheck =mysqli_real_escape_string($conn, $_POST['soldOnFinanceCheck']);
@@ -345,7 +345,6 @@ echo "<script> window.open('all-gate-pass.php', '_self')</script>";
 			`accessorie_update` = '$accessorie_update',
 			`insuranceOpted` = '$insuranceOpted',
 			`cr_no` = '$cr_no',
-			`financer_name` = '$financer_name',
 			`financer_tenure` = '$financer_tenure',
 			`financeBy` = '$financeBy',
 			`doNo` = '$doNo',
@@ -416,7 +415,6 @@ echo "<script> window.open('all-gate-pass.php', '_self')</script>";
 			`accessorie_update` = '$accessorie_update',
 			`insuranceOpted` = '$insuranceOpted',
 			`cr_no` = '$cr_no',
-			`financer_name` = '$financer_name',
 			`financer_tenure` = '$financer_tenure',
 			`financeBy` = '$financeBy',
 			`doNo` = '$doNo',
@@ -2452,16 +2450,7 @@ return true;
 
 		<div class="form-group">
 			<label id="font-color-label" style="color : #7200ff;" >Finance DSE name</label><br>
-			<select name="financeDseName" id="financeDseName" class="form-control" >
-				FINANCE DSE NAME
-			<?php 
-			$s = "SELECT * FROM financemode ORDER BY name DESC";
-			$se = mysqli_query($conn, $s);
-			While($sel = mysqli_fetch_array($se)){
-			?>
-			<option value="<?php echo $sel['id']; ?>" <?php if($gate['financeDseName'] == $sel['id']){echo "selected";}?>><?php echo $sel['name']; ?></option>
-			<?php } ?>
-			</select>
+			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financeDseName" id="financeDseName" value="<?php echo $gate['financeDseName']; ?>">
 		</div>
 
 		<div class="form-group">
@@ -2531,11 +2520,12 @@ return true;
 		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="cr_no" value="<?php echo $gate['cr_no']; ?>">
 		</div>	
 
+<!-- 		
 		<div class="form-group">
 		<label id="font-color-label"> Financer Name </label>
-		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financer_name"  value="<?php echo $gate['financer_name']; ?>">
+		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financer_name"  value="<?php //echo $gate['financer_name']; ?>">
 		</div>
-
+ -->
 
 		<div class="form-group">
 		<label id="font-color-label"> Finance Tenure </label>

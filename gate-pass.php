@@ -227,7 +227,7 @@ require_once('header/conn.php');
     $paymentReceivable =mysqli_real_escape_string($conn, $_POST['paymentReceivable']);
 
     // Added New Section For Finance Section Start
-    $financer_name =mysqli_real_escape_string($conn, $_POST['financer_name']);    
+    //$financer_name =mysqli_real_escape_string($conn, $_POST['financer_name']);    
     //$financer_amt =mysqli_real_escape_string($conn, $_POST['financer_amt']);    
     $financer_tenure =mysqli_real_escape_string($conn, $_POST['financer_tenure']);    
 	// Added New Section For Finance Section End
@@ -281,7 +281,7 @@ require_once('header/conn.php');
 	`receiptAmtFive`,`receiptNoSix`,`receiptAmtSix`,`receiptNoSeven`,`receiptAmtSeven`,`receiptNoEight`,`receiptAmtEight`,
 	`receiptOptOne`,`receiptOptTwo`,`receiptOptThree`,`receiptOptFour`,`receiptOptFive`,`receiptOptSix`,`receiptOptSeven`,
 	`receiptOptEight`,`idProofCard`,`idProofdoc`,`invoiceDoc`,`insuranceDoc`,`rcDoc`,`salesPerson`,`pD`,`shortItem`,`accessorie`,
-	`subAccessorie`,`currDate`,`paymentReceivable`,`address`,`remark`,`serviceBook`,`deliveryKm`,`financer_name`,`financer_tenure`,
+	`subAccessorie`,`currDate`,`paymentReceivable`,`address`,`remark`,`serviceBook`,`deliveryKm`,`financer_tenure`,
 	soldOnFinanceCheck, financeBy, doNo, financeDseName, financeDetailsCheckBy, dp, insuranceOpted , cr_no)
 	VALUES ('$gatePassNo','$chasisNo','$receiptdata','$amount','$receiptdatatwo','$amounttwo','$receiptdatathree','$amountthree',
 	'$receiptdatafour','$amountfour','$receiptdatafive','$amountfive','$receiptdatasix','$amountsix','$receiptdataseven',
@@ -289,7 +289,7 @@ require_once('header/conn.php');
 	'$receiptoptionthree','$receiptoptionfour','$receiptoptionfive','$receiptoptionsix','$receiptoptionseven','$receiptoptioneight',
 	'$idproofdocument','$uploadedFileIdDoc','$uploadedinvoiceDoc','$uploadedinsuranceDoc','$uploadedrcDoc','$salesPerson','$pD',
 	'$shortItem','$accessorie','$subAccessorie',CURDATE(),'$paymentReceivable','$address','$remark','$serviceBook','$deliveryKm',
-	'$financer_name','$financer_tenure' , '$soldOnFinanceCheck', '$financeBy', '$doNo', '$financeDseName', 
+	'$financer_tenure' , '$soldOnFinanceCheck', '$financeBy', '$doNo', '$financeDseName', 
 	'$financeDetailsCheckBy', '$dp' , '$insuranceOpted' , '$cr_no')";
 
 	// die();
@@ -2221,17 +2221,20 @@ return true;
 
 		<div class="form-group">
 			<label id="font-color-label" style="color : #7200ff;" >Finance DSE name</label><br>
-			<select name="financeDseName" id="financeDseName" class="form-control" >
+			
+<!-- 			<select name="financeDseName" id="financeDseName" class="form-control" >
 				FINANCE DSE NAME
 			<option value="">Select</option>
 			<?php 
-			$s = "SELECT * FROM financemode ORDER BY name DESC";
-			$se = mysqli_query($conn, $s);
-			While($sel = mysqli_fetch_array($se)){
+			// $s = "SELECT * FROM financemode ORDER BY name DESC";
+			// $se = mysqli_query($conn, $s);
+			// While($sel = mysqli_fetch_array($se)){
 			?>
-			<option value="<?php echo $sel['id']; ?>"><?php echo $sel['name']; ?></option>
-			<?php } ?>
-			</select>
+			<option value="<?php //echo $sel['id']; ?>"><?php //echo $sel['name']; ?></option>
+			<?php //} ?>
+			</select> -->
+
+			<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financeDseName" id="financeDseName">
 		</div>
 
 		<div class="form-group">
@@ -2278,11 +2281,12 @@ return true;
 		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="cr_no" >
 		</div>	
 
+<!-- 		
 		<div class="form-group">
 		<label id="font-color-label"> Financer Name </label>
 		<input type="text" class="form-control" style="font-weight: 900; color: crimson;"/ name="financer_name" >
 		</div>
-
+-->
 
 
 		<!-- <div class="form-group">
